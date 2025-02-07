@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addHotel } from '../requests/adminRequests';
-import './AuthStyles.css';
 
 const AddHotel = () => {
   const [name, setName] = useState('');
@@ -35,37 +34,37 @@ const AddHotel = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h1>Add Hotel</h1>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-200">
+      <h1 className="text-2xl font-bold mb-6">Add Hotel</h1>
       <input
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Hotel Name"
-        className="auth-input"
+        className="w-72 p-2 mb-4 border border-gray-300 rounded"
       />
       <input
         type="text"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
         placeholder="Hotel Location"
-        className="auth-input"
+        className="w-72 p-2 mb-4 border border-gray-300 rounded"
       />
       <input
         type="number"
         value={price}
         onChange={(e) => setPrice(e.target.value)}
         placeholder="Hotel Price"
-        className="auth-input"
+        className="w-72 p-2 mb-4 border border-gray-300 rounded"
       />
       <input
         type="number"
         value={roomAvailable}
         onChange={(e) => setRoomAvailable(e.target.value)}
         placeholder="Rooms Available"
-        className="auth-input"
+        className="w-72 p-2 mb-4 border border-gray-300 rounded"
       />
-      <button onClick={handleAddHotel} className="auth-button">Add Hotel</button>
+      <button onClick={handleAddHotel} className="w-72 p-2 bg-blue-500 text-white rounded hover:bg-blue-700">Add Hotel</button>
     </div>
   );
 };

@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getHotels, deleteHotel } from '../requests/adminRequests';
 import { bookHotel } from '../requests/userRequests'; // Import bookHotel function for users
 import { useAuth } from '../context/AuthContext';
-import './HotelsList.css'; // Import CSS styles
 
 const HotelsList = () => {
   const [hotels, setHotels] = useState([]);
@@ -47,46 +46,46 @@ const HotelsList = () => {
   };
 
   return (
-    <div className="hotels-list-container">
-      <h1>Hotels</h1>
-      <table className="hotels-table">
+    <div className="p-5 max-w-3xl mx-auto">
+      <h1 className="text-2xl font-bold mb-5">Hotels</h1>
+      <table className="w-full border-collapse mt-5">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Price</th>
-            <th>Availability</th>
-            <th>Actions</th>
+            <th className="p-2 border-b border-gray-300 text-left">Name</th>
+            <th className="p-2 border-b border-gray-300 text-left">Location</th>
+            <th className="p-2 border-b border-gray-300 text-left">Price</th>
+            <th className="p-2 border-b border-gray-300 text-left">Availability</th>
+            <th className="p-2 border-b border-gray-300 text-left">Actions</th>
           </tr>
         </thead>
         <tbody>
           {hotels.map((hotel) => (
             <tr key={hotel._id}>
-              <td>
+              <td className="p-2 border-b border-gray-300 align-middle">
                 {user.role === 'admin' ? (
-                  <Link to={`/admin/hotels/${hotel._id}`}>{hotel.name}</Link>
+                  <Link to={`/admin/hotels/${hotel._id}`} className="text-blue-500 hover:underline">{hotel.name}</Link>
                 ) : (
                   hotel.name
                 )}
               </td>
-              <td>{hotel.location}</td>
-              <td>₹{hotel.price}</td>
-              <td>{hotel.roomAvailable} rooms</td>
-              <td>
+              <td className="p-2 border-b border-gray-300 align-middle">{hotel.location}</td>
+              <td className="p-2 border-b border-gray-300 align-middle">₹{hotel.price}</td>
+              <td className="p-2 border-b border-gray-300 align-middle">{hotel.roomAvailable} rooms</td>
+              <td className="p-2 border-b border-gray-300 align-middle">
                 {user.role === 'admin' ? (
                   <>
-                    <button onClick={() => navigate(`/admin/edit-hotel/${hotel._id}`)}>Edit</button>
-                    <button onClick={() => handleDeleteHotel(hotel._id)}>Delete</button>
+                    <button onClick={() => navigate(`/admin/edit-hotel/${hotel._id}`)} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Edit</button>
+                    <button onClick={() => handleDeleteHotel(hotel._id)} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">Delete</button>
                   </>
                 ) : (
-                  <button onClick={() => handleBookHotel(hotel._id)}>Book</button>
+                  <button onClick={() => handleBookHotel(hotel._id)} className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">Book</button>
                 )}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      {user.role === 'admin' && <button className="add-hotel-button" onClick={handleAddHotel}>Add Hotel</button>}
+      {user.role === 'admin' && <button className="w-full p-2 mt-4 bg-blue-500 text-white rounded hover:bg-blue-700" onClick={handleAddHotel}>Add Hotel</button>}
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getBookingsByUserId } from '../requests/userRequests';
 import { useAuth } from '../context/AuthContext';
-import './UserBookings.css'; // Import CSS styles
 
 const UserBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -11,7 +10,7 @@ const UserBookings = () => {
     const fetchBookings = async () => {
       try {
         const bookingsData = await getBookingsByUserId(user._id);
-        console.log(bookingsData)
+        console.log(bookingsData);
         setBookings(bookingsData);
       } catch (error) {
         console.error('Error fetching bookings:', error);
@@ -22,24 +21,24 @@ const UserBookings = () => {
   }, [user.username]);
 
   return (
-    <div className="bookings-list-container">
-      <h1>My Bookings</h1>
-      <table className="bookings-table">
+    <div className="p-5 max-w-3xl mx-auto">
+      <h1 className="text-2xl font-bold mb-5">My Bookings</h1>
+      <table className="w-full border-collapse mt-5">
         <thead>
           <tr>
-            <th>Hotel Name</th>
-            <th>Location</th>
-            <th>Price</th>
-            <th>Date</th>
+            <th className="p-2 border-b border-gray-300 text-left">Hotel Name</th>
+            <th className="p-2 border-b border-gray-300 text-left">Location</th>
+            <th className="p-2 border-b border-gray-300 text-left">Price</th>
+            <th className="p-2 border-b border-gray-300 text-left">Date</th>
           </tr>
         </thead>
         <tbody>
           {bookings.map((booking) => (
             <tr key={booking.id}>
-              <td>{booking.hotel.name}</td>
-              <td>{booking.hotel.location}</td>
-              <td>₹{booking.hotel.price}</td>
-              <td>{new Date(booking.date).toDateString()}</td>
+              <td className="p-2 border-b border-gray-300 align-middle">{booking.hotel.name}</td>
+              <td className="p-2 border-b border-gray-300 align-middle">{booking.hotel.location}</td>
+              <td className="p-2 border-b border-gray-300 align-middle">₹{booking.hotel.price}</td>
+              <td className="p-2 border-b border-gray-300 align-middle">{new Date(booking.date).toDateString()}</td>
             </tr>
           ))}
         </tbody>
